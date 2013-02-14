@@ -45,7 +45,7 @@ class NavigateToPose(TaskBase):
         # self.cmd_vel_pub = rospy.Publisher("base_controller/command", gm.Twist)
 
     def run(self):
-        goal = self.get_goal()
+        goal = self.get_handle().get_goal()
         frame_id = goal['frame_id']
         x = goal['x']
         y = goal['y']
