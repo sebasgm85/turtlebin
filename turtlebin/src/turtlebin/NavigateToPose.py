@@ -28,13 +28,13 @@ class NavigateToPose(TaskBase):
 
     goal_class = None
     
-    def __init__(self, handle, goal):
+    def __init__(self, handle):
         '''
         input_keys=['frame_id', 'x', 'y', 'theta', 'collision_aware']
         outcomes = ['succeeded', 'failed', 'preempted', 'error']
         '''
 
-        TaskBase.__init__(self, handle, goal)
+        TaskBase.__init__(self, handle)
         move_base_uri = '/move_base'
         self.move_base_node_name = rospy.get_param('move_base_node_name', '/move_base_node')
         self.move_base_client = actionlib.SimpleActionClient(move_base_uri, mbm.MoveBaseAction)
