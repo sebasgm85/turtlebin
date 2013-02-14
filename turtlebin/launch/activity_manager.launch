@@ -1,0 +1,18 @@
+<launch>
+  <arg name="debug" default="false"/>
+
+  <!-- debug mode -->
+  <group ns="task_manager" if="$(arg debug)">
+    <node pkg="task_manager" type="task_manager_server" name="task_manager_server" launch-prefix="xterm -e python -m pdb">
+      <rosparam command="load" file="$(find turtlebin)/config/task_manager_config.yaml" />
+    </node>
+  </group>
+
+  <!-- regular mode -->
+  <group ns="task_manager" unless="$(arg debug)">
+    <node pkg="task_manager" type="task_manager_server" name="task_manager_server">
+      <rosparam command="load" file="$(find turtlebin)/config/task_manager_config.yaml" />
+    </node>
+  </group>
+
+</launch>

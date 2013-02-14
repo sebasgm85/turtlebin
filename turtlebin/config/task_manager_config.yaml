@@ -1,0 +1,3 @@
+tasks:
+        - "turtlebin/Dummy"
+        - "turtlebin/NavigateToPose"
