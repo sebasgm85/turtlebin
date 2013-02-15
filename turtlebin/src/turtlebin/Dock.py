@@ -4,6 +4,7 @@ Extracted from kobuki_auto_docking
 import rospy
 import actionlib
 from actionlib_msgs.msg import GoalStatus
+import roslib; roslib.load_manifest('kobuki_msgs')
 from kobuki_msgs.msg import AutoDockingAction, AutoDockingGoal
 from task_manager.task_base import TaskBase
 

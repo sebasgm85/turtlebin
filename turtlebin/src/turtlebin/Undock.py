@@ -3,6 +3,7 @@ Made up from scratch
 '''
 import rospy
 from geometry_msgs.msg import Twist, Vector3
+import roslib; roslib.load_manifest('kobuki_msgs')
 from kobuki_msgs.msg import MotorPower
 from task_manager.task_base import TaskBase
 
@@ -12,7 +13,7 @@ class Undock(TaskBase):
     """
 
     goal_class = None
-    bw_twist = Twist(liner=Vector3( -0.15, 0, 0))
+    bw_twist = Twist(linear=Vector3( -0.15, 0, 0))
     
     def __init__(self, handle):
         '''

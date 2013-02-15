@@ -2,4 +2,4 @@ tasks:
         - "turtlebin/Dummy"
         - "turtlebin/NavigateToPose"
         - "turtlebin/Dock"
-        - "turtlebin/Unock"
+        - "turtlebin/Undock"
