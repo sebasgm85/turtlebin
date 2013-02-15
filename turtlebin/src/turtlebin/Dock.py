@@ -21,12 +21,13 @@ class Dock(TaskBase):
         outcomes = ['succeeded', 'failed', 'preempted', 'error']
         '''
         TaskBase.__init__(self, handle)
-        self._client = actionlib.SimpleActionClient('dock_drive_action', AutoDockingAction)
+
+    def run(self):
+        rospy.sleep(2)
+        self._client = actionlib.SimpleActionClient('/dock_drive_action', AutoDockingAction)
         rospy.loginfo("waiting for auto_docking server")
         self._client.wait_for_server()
         rospy.loginfo("auto_docking server found")
-
-    def run(self):
         goal = AutoDockingGoal()
         rospy.loginfo("Sending auto_docking goal and waiting for result")
         self._client.send_goal(goal)

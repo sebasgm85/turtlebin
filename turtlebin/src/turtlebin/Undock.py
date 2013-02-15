@@ -26,6 +26,7 @@ class Undock(TaskBase):
         rospy.loginfo("created cmd_vel publisher")
 
     def run(self):
+        rospy.sleep(2)
         rospy.loginfo("Resetting motors, just in case")
         self.motors_pub.publish(MotorPower(state=1))
         rospy.sleep(1)
