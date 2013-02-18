@@ -1,0 +1,61 @@
+<launch>
+  <arg name="http_streamer" default="true" />
+  <arg name="task_manager" default="true" />
+  <arg name="navigation" default="true" />
+
+  <include file="$(find turtlebot_bringup)/launch/minimal.launch"/> 
+
+  <!-- ***Navigation*** -->
+  <!-- code lines from the amcl_demo launch file -->  
+  
+   <include file="$(find turtlebot_bringup)/launch/3dsensor.launch">
+    <arg name="rgb_processing" value="true" />
+    <arg name="depth_registration" value="false" />
+    <arg name="depth_processing" value="false" />
+   </include>
+
+   <!-- Map server -->
+   <arg name="map_file" default="~/creativa.ttb2.map_edited.yaml"/>
+   <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+
+   <arg name="initial_pose_x" default="0.0"/> <!-- Use 17.0 for willow's map in simulation -->
+   <arg name="initial_pose_y" default="0.0"/> <!-- Use 17.0 for willow's map in simulation -->
+   <arg name="initial_pose_a" default="0.0"/>
+   <include file="$(find turtlebot_navigation)/launch/includes/_amcl.launch">
+     <arg name="initial_pose_x" value="$(arg initial_pose_x)"/>
+     <arg name="initial_pose_y" value="$(arg initial_pose_y)"/>
+     <arg name="initial_pose_a" value="$(arg initial_pose_a)"/>
+   </include>
+
+   <include file="$(find turtlebot_navigation)/launch/includes/_move_base.launch"/>
+
+
+  <!-- ***video streamer*** -->
+
+  <!-- <group if="$(arg http_streamer)"> -->
+  <!--  <node name="ros_http_video_streamer" pkg="ros_http_video_streamer" type="ros_http_video_streamer" > -->
+   <!--   <param name="port" value="9999"/> -->
+   <!--   <param name="host" value="10.1.0.19"/> -->
+   <!--   <param name="framerate" value="15"/> -->
+   <!--   <param name="bitrate" value="250000"/> -->
+   <!--  </node> -->
+  <!-- </group> -->
+
+
+  <!-- ***auto docking*** -->
+  <include file="$(find kobuki_auto_docking)/launch/standalone.launch" />
+
+
+  <!-- ***rosbridge*** -->
+  
+  <!-- <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch" > -->
+   <!--  <param name="/rosbridge/port" value="9099"/> -->
+  <!-- </include> -->
+
+
+  <!-- ***task manager***-->
+
+  <!-- <include file="$(find turtlebin)/launch/task_manager.launch" /> -->
+
+
+</launch>
