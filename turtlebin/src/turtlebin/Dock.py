@@ -28,8 +28,8 @@ class Dock(TaskBase):
         dock_pose = PoseWithCovarianceStamped()
         dock_pose.header.stamp = rospy.Time.now()
         dock_pose.header.frame_id = "/map"
-        dock_pose.pose.pose.position = Point(-0.704077699553, 2.19588008448, 0.0)
-        dock_pose.pose.pose.orientation = Quaternion(0.0, 0.0, 0.673898266875, 0.738824150866)
+        dock_pose.pose.pose.position = Point(-0.410270094872, 2.83447694778, 0.0)
+        dock_pose.pose.pose.orientation = Quaternion(0.0, 0.0, 0.706556777013, 0.707656357886)
         dock_pose.pose.covariance = [0.25, 0.0, 0.0, 0.0, 0.0, 0.0, 
                                         0.0, 0.25, 0.0, 0.0, 0.0, 0.0, 
                                         0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 
@@ -38,6 +38,9 @@ class Dock(TaskBase):
                                         0.0, 0.0, 0.0, 0.0, 0.0, 0.1]
         '''
         Option 2: from Seba:
+
+        dock_pose.pose.pose.position = Point(-0.704077699553, 2.19588008448, 0.0)
+        dock_pose.pose.pose.orientation = Quaternion(0.0, 0.0, 0.673898266875, 0.738824150866)
     [0.31606560191647776, 0.06198562158713172, 0.0, 0.0, 0.0, 
      0.0, 0.06198562158713172, 0.3278696884522585, 0.0, 0.0, 0.0,
      0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
