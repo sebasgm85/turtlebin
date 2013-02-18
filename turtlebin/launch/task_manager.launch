@@ -1,5 +1,5 @@
 <launch>
-  <arg name="debug" default="true"/>
+  <arg name="debug" default="false"/>
 
   <!-- debug mode -->
   <group ns="task_manager" if="$(arg debug)">
