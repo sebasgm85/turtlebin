@@ -2,6 +2,8 @@
   <arg name="http_streamer" default="true" />
   <arg name="task_manager" default="true" />
   <arg name="navigation" default="true" />
+  
+  <param name="/rosbridge/port" value="9099"/> 
 
   <!-- ***turtlebot startup***  -->
    <include file="$(find turtlebot_bringup)/launch/minimal.launch"/> 
@@ -50,7 +52,6 @@
 
   <!-- ***rosbridge*** -->
    <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch" > 
-    <param name="/rosbridge/port" value="9099"/> 
    </include> 
 
 
