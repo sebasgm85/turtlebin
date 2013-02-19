@@ -37,7 +37,7 @@
   <!-- ***video streamer*** -->
 
    <group if="$(arg http_streamer)"> 
-    <node name="ros_http_video_streamer" pkg="ros_http_video_streamer" type="ros_http_video_streamer" > 
+    <node name="ros_video_streamer" pkg="ros_video_streamer" type="ros_video_streamer" > 
      <param name="port" value="9999"/> 
      <param name="host" value="10.1.0.19"/> 
      <param name="framerate" value="15"/> 
