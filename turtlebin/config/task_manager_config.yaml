@@ -3,3 +3,4 @@ tasks:
         - "turtlebin/NavigateToPose"
         - "turtlebin/Dock"
         - "turtlebin/Undock"
+        - "turtlebin/Speak"
