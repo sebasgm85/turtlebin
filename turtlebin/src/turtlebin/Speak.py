@@ -10,6 +10,9 @@ class Speak(TaskBase):
     Speaks a text using python esynth
     """
 
+    # I don't know what this is for, but it's necessary
+    goal_class = None
+
     def __init__(self, handle):
         '''
         input_keys=['text']
