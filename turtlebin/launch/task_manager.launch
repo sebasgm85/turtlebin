@@ -10,7 +10,7 @@
 
   <!-- regular mode -->
   <group ns="task_manager" unless="$(arg debug)">
-    <node pkg="task_manager" type="task_manager_server" name="task_manager_server">
+    <node pkg="task_manager" type="task_manager_server" name="task_manager_server" output="screen">
       <rosparam command="load" file="$(find turtlebin)/config/task_manager_config.yaml" />
     </node>
   </group>

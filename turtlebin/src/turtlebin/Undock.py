@@ -31,9 +31,9 @@ class Undock(TaskBase):
         self.motors_pub.publish(MotorPower(state=1))
         rospy.sleep(1)
 
-        rospy.loginfo("Sending 8 backwards-motion twists at 4hz and hoping it will work")
+        rospy.loginfo("Sending 12 backwards-motion twists at 4hz and hoping it will work")
         r = rospy.Rate(4)
-        for i in range(8):
+        for i in range(12):
             self.cmd_vel_pub.publish(self.bw_twist)
             r.sleep()
 
