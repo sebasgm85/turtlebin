@@ -25,22 +25,24 @@ class Dock(TaskBase):
         self.initial_pose_pub = rospy.Publisher('/initialpose', PoseWithCovarianceStamped)
 
         # The dock_pose is taken from a rosparam which is global and should be set (currently) on everything.launch 
-        #TODO use a dictionary with just one param '/dock_pose' and add the '/dock_orientation' to replace Quaternion harcoding 
+        # TODO use a dictionary with just one param '/dock_pose' and add the '/dock_orientation' to replace Quaternion harcoding 
+        self.dock_pose_param = {} 
         if rospy.has_param('/dock_pose/x') and rospy.has_param('/dock_pose/y') and  rospy.has_param('/dock_pose/z'):
-            self.dock_pose_param.x = rospy.get_param('/dock_pose/x')
-            self.dock_pose_param.y = rospy.get_param('/dock_pose/y')
-            self.dock_pose_param.z = rospy.get_param('/dock_pose/z')
+            self.dock_pose_param["x"] = rospy.get_param('/dock_pose/x')
+            self.dock_pose_param["y"] = rospy.get_param('/dock_pose/y')
+            self.dock_pose_param["z"] = rospy.get_param('/dock_pose/z')
         else:
-            self.dock_pose_param.x = -0.0252804756165
-            self.dock_pose_param.y = 2.70252466202
-            self.dock_pose_param.z = 0.0
+            rospy.logwarn("/dock_pose param does not exist. I'm using default values")
+            self.dock_pose_param["x"] = -0.0252804756165
+            self.dock_pose_param["y"] = 2.70252466202
+            self.dock_pose_param["z"] = 0.0
 
     def _create_dock_pose(self):
         dock_pose = PoseWithCovarianceStamped()
         dock_pose.header.stamp = rospy.Time.now()
         dock_pose.header.frame_id = "/map"
        # dock_pose.pose.pose.position = Point(-0.0252804756165, 2.70252466202, 0.0)
-        dock_pose.pose.pose.position = Point(self.dock_pose_param.x, self.dock_pose_param.y, self.dock_pose_param.z)
+        dock_pose.pose.pose.position = Point(self.dock_pose_param["x"], self.dock_pose_param["y"], self.dock_pose_param["z"])
         dock_pose.pose.pose.orientation = Quaternion(0.0, 0.0, 0.706556777013, 0.707656357886)
         dock_pose.pose.covariance = [0.25, 0.0, 0.0, 0.0, 0.0, 0.0, 
                                         0.0, 0.25, 0.0, 0.0, 0.0, 0.0, 
