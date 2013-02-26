@@ -24,11 +24,18 @@ class Dock(TaskBase):
         TaskBase.__init__(self, handle)
         self.initial_pose_pub = rospy.Publisher('/initialpose', PoseWithCovarianceStamped)
 
+        # The dock_pose is taken from a rosparam which is global and should be set (currently) on everything.launch 
+        if rospy.has_param('/dock_pose'):
+            self.dock_pose = rospy.get_param('/dock_pose')
+        else:
+            self.dock_pose = Point(-0.0252804756165, 2.70252466202, 0.0) 
+
     def _create_dock_pose(self):
         dock_pose = PoseWithCovarianceStamped()
         dock_pose.header.stamp = rospy.Time.now()
         dock_pose.header.frame_id = "/map"
-        dock_pose.pose.pose.position = Point(-0.0252804756165, 2.70252466202, 0.0)
+       # dock_pose.pose.pose.position = Point(-0.0252804756165, 2.70252466202, 0.0)
+        dock_pose.pose.pose.position = self.dock_pose
         dock_pose.pose.pose.orientation = Quaternion(0.0, 0.0, 0.706556777013, 0.707656357886)
         dock_pose.pose.covariance = [0.25, 0.0, 0.0, 0.0, 0.0, 0.0, 
                                         0.0, 0.25, 0.0, 0.0, 0.0, 0.0, 
