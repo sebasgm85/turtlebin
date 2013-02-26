@@ -1,5 +1,5 @@
 '''
-Extracted from kobuki_auto_docking
+Extracted from kobuki_auto_dockin
 '''
 import rospy
 import actionlib
@@ -24,10 +24,13 @@ class Dock(TaskBase):
         TaskBase.__init__(self, handle)
         self.initial_pose_pub = rospy.Publisher('/initialpose', PoseWithCovarianceStamped)
 
-        # The dock_pose is taken from a rosparam which is global and should be set (currently) on everything.launch 
-        # TODO use a dictionary with just one param '/dock_pose' and add the '/dock_orientation' to replace Quaternion harcoding 
+        # The dock_pose_param and dock_orientation_param are taken from respective rosparams which are global and should be set (currently) on turtlebin/launch/everything.launch 
+        
         self.dock_pose_param = {} 
-        if rospy.has_param('/dock_pose/x') and rospy.has_param('/dock_pose/y') and  rospy.has_param('/dock_pose/z'):
+        self.dock_orientation_param = {}
+ 
+        if rospy.has_param('/dock_pose') 
+            rospy.loginfo("/dock_pose parameter loaded")
             self.dock_pose_param["x"] = rospy.get_param('/dock_pose/x')
             self.dock_pose_param["y"] = rospy.get_param('/dock_pose/y')
             self.dock_pose_param["z"] = rospy.get_param('/dock_pose/z')
@@ -37,13 +40,27 @@ class Dock(TaskBase):
             self.dock_pose_param["y"] = 2.70252466202
             self.dock_pose_param["z"] = 0.0
 
+       if rospy.has_param('/dock_orientation'):
+            rospy.loginfo("/dock_orientation parameter loaded")
+            self.dock_orientation_param["x"] = rospy.get_param('/dock_orientation/x')
+            self.dock_orientation_param["y"] = rospy.get_param('/dock_orientation/y')
+            self.dock_orientation_param["z"] = rospy.get_param('/dock_orientation/z')
+            self.dock_orientation_param["w"] = rospy.get_param('/dock_orientation/w')
+        else:
+            rospy.logwarn("/dock_orientation parameter does not exist. I'm using default values")
+            self.dock_orientation_param["x"] = 0.0
+            self.dock_orientation_param["y"] = 0.0
+            self.dock_orientation_param["z"] = 0.706556777013
+            self.dock_orientation_param["z"] = 0.707656357886
+
     def _create_dock_pose(self):
         dock_pose = PoseWithCovarianceStamped()
         dock_pose.header.stamp = rospy.Time.now()
         dock_pose.header.frame_id = "/map"
        # dock_pose.pose.pose.position = Point(-0.0252804756165, 2.70252466202, 0.0)
         dock_pose.pose.pose.position = Point(self.dock_pose_param["x"], self.dock_pose_param["y"], self.dock_pose_param["z"])
-        dock_pose.pose.pose.orientation = Quaternion(0.0, 0.0, 0.706556777013, 0.707656357886)
+       # dock_pose.pose.pose.orientation = Quaternion(0.0, 0.0, 0.706556777013, 0.707656357886)
+        dock_pose.pose.pose.orientation = Quaternion(self.dock_orientation_param["x"], self.dock_orientation_param["y"], self.dock_orientation_param["z"], self.dock_orientation_param["w"])
         dock_pose.pose.covariance = [0.25, 0.0, 0.0, 0.0, 0.0, 0.0, 
                                         0.0, 0.25, 0.0, 0.0, 0.0, 0.0, 
                                         0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 
