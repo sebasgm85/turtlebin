@@ -40,7 +40,7 @@ class Dock(TaskBase):
             self.dock_pose_param["y"] = 2.70252466202
             self.dock_pose_param["z"] = 0.0
 
-       if rospy.has_param('/dock_orientation'):
+        if rospy.has_param('/dock_orientation'):
             rospy.loginfo("/dock_orientation parameter loaded")
             self.dock_orientation_param["x"] = rospy.get_param('/dock_orientation/x')
             self.dock_orientation_param["y"] = rospy.get_param('/dock_orientation/y')
