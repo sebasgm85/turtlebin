@@ -5,6 +5,12 @@
   
   <param name="/rosbridge/port" value="9099"/> 
 
+  <!-- <param name="/dock_pose" value="{'x': -0.0252804756165, 'y': 2.70252466202, 'z': 0.0}"/> --> 
+  <!-- <param name="/dock_orientation" value="{'': , '': , '': , '': }"/> --> 
+  <param name="/dock_pose/x" value="-0.0252804756165"/> 
+  <param name="/dock_pose/y" value="2.70252466202"/> 
+  <param name="/dock_pose/z" value="0.0"/> 
+
   <!-- ***turtlebot startup***  -->
    <include file="$(find turtlebot_bringup)/launch/minimal.launch"/> 
 
